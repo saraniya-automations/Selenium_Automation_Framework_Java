@@ -8,38 +8,32 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     WebDriver driver;
     WebDriverWait wait;
 
-    @FindBy(name = "username")
+    @FindBy(css = "input[name='username']")
     private WebElement usernameField;
-    @FindBy(name = "password")
+    @FindBy(css = "input[name='password']")
     private WebElement passwordField;
     @FindBy(css = "button[type='submit']")
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public void enterUsername(String username) {
-        wait.until(ExpectedConditions.visibilityOf(usernameField));
-        usernameField.clear();
-        usernameField.sendKeys(username);
+        type(usernameField, username);
     }
 
     public void enterPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOf(passwordField));
-        passwordField.clear();
-        passwordField.sendKeys(password);
+        type(passwordField, password);
     }
 
     public void clickLoginButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
     }
 
