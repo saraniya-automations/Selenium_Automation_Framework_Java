@@ -1,0 +1,7 @@
+@ECHO OFF
+setlocal
+set MAVEN_PROJECTBASEDIR=%~dp0
+if "%MAVEN_PROJECTBASEDIR:~-1%"=="\" set MAVEN_PROJECTBASEDIR=%MAVEN_PROJECTBASEDIR:~0,-1%
+set MAVEN_CMD_LINE_ARGS=%*
+"%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.jar" %*
+endlocal

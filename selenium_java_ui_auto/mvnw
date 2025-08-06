@@ -1,0 +1,5 @@
+#!/bin/sh
+BASEDIR=$(dirname "$0")
+JAVA_CMD="java"
+WRAPPER_JAR="$BASEDIR/.mvn/wrapper/maven-wrapper.jar"
+exec $JAVA_CMD -jar $WRAPPER_JAR "$@"
