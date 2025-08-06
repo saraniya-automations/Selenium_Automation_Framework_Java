@@ -17,7 +17,7 @@ public class BaseTest {
         driver = DriverManager.getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get("https://example.com"); // replace with your app URL
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"); // replace with your app URL
     }
 
     @AfterMethod
