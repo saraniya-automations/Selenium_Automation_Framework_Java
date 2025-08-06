@@ -16,7 +16,7 @@ public class DashboardPage extends BasePage {
     }
 
     public boolean isDashboardDisplayed() {
-        return isDisplayed(dashboardTitle);
+        return isElementDisplayed(dashboardTitle);
     }
 
 }
