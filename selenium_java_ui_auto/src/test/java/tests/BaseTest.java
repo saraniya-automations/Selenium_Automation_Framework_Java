@@ -15,9 +15,12 @@ public class BaseTest {
     public void setUp() {
         String browser = ConfigReader.getBrowser();
         String appUrl = ConfigReader.getAppUrl();
+        System.out.println("Browser from config: " + browser);
+        System.out.println("URL from config: " + appUrl);
 
         DriverManager.initDriver(browser);
         driver = DriverManager.getDriver();
+        System.out.println("Driver initialized: " + (driver != null));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get(appUrl);

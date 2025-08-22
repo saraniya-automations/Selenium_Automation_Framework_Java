@@ -28,8 +28,15 @@
     <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>
-        <version>7.10.2</version>
-        <scope>test</scope>
+        <version>7.8.0</version>
+        <!-- <scope>test</scope> -->
+    </dependency>
+
+    <!-- Extent Report-->
+    <dependency>
+        <groupId>com.aventstack</groupId>
+        <artifactId>extentreports</artifactId>
+        <version>5.1.1</version>
     </dependency>
 
     <!-- WebDriverManager -->
@@ -62,6 +69,13 @@
         <artifactId>extentreports</artifactId>
         <version>5.1.1</version>
     </dependency>
+
+    <!-- Needed for HTML reporter -->
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports-testng-adapter</artifactId>
+    <version>1.2.2</version>
+</dependency>
 
     <!-- Log4j2 -->
     <dependency>

@@ -4,12 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+// import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
+    // WebDriver driver;
+    // WebDriverWait wait;
 
     @FindBy(css = "input[name='username']")
     private WebElement usernameField;
@@ -17,6 +18,8 @@ public class LoginPage extends BasePage {
     private WebElement passwordField;
     @FindBy(css = "button[type='submit']")
     private WebElement loginButton;
+    @FindBy(xpath = "//div[@role='alert']//p")
+    private WebElement errorMessage;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -32,7 +35,7 @@ public class LoginPage extends BasePage {
     }
 
     public void clickLoginButton() {
-        loginButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
     }
 
     public DashboardPage login(String username, String password) {
@@ -40,6 +43,15 @@ public class LoginPage extends BasePage {
         enterPassword(password);
         clickLoginButton();
         return new DashboardPage(driver);
+    }
+
+    public boolean isErrorMessageDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(errorMessage));
+            return isElementDisplayed(errorMessage);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

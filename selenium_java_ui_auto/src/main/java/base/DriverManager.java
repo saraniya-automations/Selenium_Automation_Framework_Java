@@ -26,7 +26,11 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver() {
-        return driver.get();
+        WebDriver currentDriver = driver.get();
+        if (currentDriver == null) {
+            throw new IllegalStateException("Driver not initialized. Call initDriver() first.");
+        }
+        return currentDriver;
     }
 
     public static void quitDriver() {
