@@ -20,6 +20,12 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
     @FindBy(xpath = "//div[@role='alert']//p")
     private WebElement errorMessage;
+    @FindBy(xpath = "//input[@name='username']/parent::div/following-sibling::span")
+    private WebElement usernameRequiredLabel;
+    @FindBy(xpath = "//input[@name='password']/parent::div/following-sibling::span")
+    private WebElement passwordRequiredLabel;
+    @FindBy(xpath = "//div[contains(@class,'forgot')]/p")
+    private WebElement forgotPasswordLink;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -52,6 +58,40 @@ public class LoginPage extends BasePage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean isPasswordRequiredLabelDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(passwordRequiredLabel));
+            return isElementDisplayed(passwordRequiredLabel);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isUserNameRequiredLabelDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(usernameRequiredLabel));
+            return isElementDisplayed(usernameRequiredLabel);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getPasswordFieldType() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(passwordField));
+            return passwordField.getAttribute("type");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public PasswordRecoveryPage clickForgotPasswordLink() {
+        forgotPasswordLink.click();
+        PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driver);
+        passwordRecoveryPage.waitForPageToLoad();
+        return passwordRecoveryPage;
     }
 
 }
