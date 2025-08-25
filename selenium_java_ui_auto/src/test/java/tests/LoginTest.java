@@ -3,21 +3,33 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentTest;
+
 import pages.DashboardPage;
 import pages.LoginPage;
 import pages.PasswordRecoveryPage;
 import pages.PasswordRecoverySuccessPage;
+import utils.ExtentReportManager;
 
 public class LoginTest extends BaseTest {
 
     /**
      * This test verifies that a user can log in with valid credentials. TC-001
      */
-    @Test(priority = 0, description = "TC-001")
+    @Test(priority = 0, description = "TC-001: Login with valid credentials")
     public void loginTest() {
+        ExtentTest test = ExtentReportManager.createTest("TC-001: Login with valid credentials");
         LoginPage loginPage = new LoginPage(driver);
+        test.info("Navigated to Login Page");
         DashboardPage dashboardPage = loginPage.login("Admin", "admin123");
-        Assert.assertTrue(dashboardPage.isDashboardDisplayed(), "Dashboard is not displayed after login");
+        test.info("Entered valid credentials: username=Admin, password=****");
+        boolean dashboardDisplayed = dashboardPage.isDashboardDisplayed();
+        if (dashboardDisplayed) {
+            test.pass("Dashboard displayed successfully after login");
+        } else {
+            test.fail("Dashboard not displayed after login");
+        }
+        Assert.assertTrue(dashboardDisplayed, "Dashboard is not displayed after login");
     }
 
     /**

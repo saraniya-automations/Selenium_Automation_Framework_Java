@@ -7,8 +7,6 @@
     <test name="UI Automation Tests">
         <packages>
             <package name="tests">
-                <includes>
-                    <include name="LoginTest" />
             </package>
         </packages>
     </test>

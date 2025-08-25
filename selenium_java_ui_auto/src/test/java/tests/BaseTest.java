@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 
 import base.DriverManager;
 import utils.ConfigReader;
+import utils.ExtentReportManager;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -29,5 +30,7 @@ public class BaseTest {
     @AfterMethod
     public void tearDown() {
         DriverManager.quitDriver();
+        ExtentReportManager.getInstance().flush();
     }
+
 }
