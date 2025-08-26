@@ -1,0 +1,39 @@
+name: Selenium TestNG CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies
+        run: mvn clean install -DskipTests
+
+      - name: Run Selenium tests (headless)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser chromium-chromedriver
+          export CHROME_BIN=/usr/bin/chromium-browser
+          export PATH=$PATH:/usr/lib/chromium/
+          mvn clean test -Dsurefire.suiteXmlFiles=testng.xml -Dselenium.headless=true
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports/**
