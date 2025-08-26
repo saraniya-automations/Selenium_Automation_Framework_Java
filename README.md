@@ -6,6 +6,7 @@ It is designed to be scalable, reusable, and maintainable for web UI testing.
 ---
 
 ## 📂 Project Structure
+```
 
 ├── src
 │ ├── main
@@ -13,13 +14,12 @@ It is designed to be scalable, reusable, and maintainable for web UI testing.
 │ │ │ ├── config # Configuration files (config.properties)
 │ │ │ ├── pages # Page classes (POM with BasePage)
 │ │ │ ├── utils # Utility classes (e.g., ConfigReader)
-│ │ │ └── drivers # Driver setup (WebDriver Manager)
+│ │ │ └── base # Driver setup (WebDriver Manager)
 │ └── test
-│ └── java
-│ ├── tests # Test classes
-│ └── testdata # Test data (if any)
+│ │ ├── java
+├── reports
 └── pom.xml # Maven dependencies
-
+```
 
 ---
 
@@ -96,4 +96,5 @@ Clone the repository
 
 git clone <repo-url>
 cd selenium-framework
+
 
