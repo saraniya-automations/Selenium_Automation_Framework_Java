@@ -94,4 +94,13 @@ public class LoginPage extends BasePage {
         return passwordRecoveryPage;
     }
 
+    public boolean isLoginPanelDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(loginButton));
+            return isElementDisplayed(loginButton);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
@@ -56,6 +56,16 @@ public class BasePage {
         }
     }
 
+    protected boolean isElementDisplayed(By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            waitForElementToBeVisible(element);
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     protected boolean isElementEnabled(WebElement element) {
         try {
             return element.isEnabled();
@@ -72,7 +82,7 @@ public class BasePage {
         }
     }
 
-    protected void navigateBack() {
+    public void navigateBack() {
         driver.navigate().back();
     }
 
