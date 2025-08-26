@@ -144,7 +144,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test(priority = 9, description = "TC-011 : session handling after logout")
+    @Test(priority = 9, description = "TC-011 : session handling after logout.")
     public void sessionHandlingAfterLogout() {
         LoginPage loginPage = new LoginPage(driver);
         DashboardPage dashboardPage = loginPage.login("Admin", "admin123");

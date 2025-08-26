@@ -88,4 +88,9 @@ public class DashboardTest extends BaseTest {
         basepage.navigateBack();
     }
 
+    @Test(priority = 12, description = "TC-014: Verify Dashboard Widgets")
+    public void verifyDashboardWidgetsTest() {
+
+    }
+
 }
