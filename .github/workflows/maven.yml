@@ -1,41 +1,37 @@
-name: Selenium TestNG CI
+name: Selenium Java UI Automation CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Install dependencies
-        working-directory: Selenium_Automation_Framework_Java
-        run: mvn clean install -DskipTests
-
-      - name: Run Selenium tests (headless)
-        working-directory: Selenium_Automation_Framework_Java
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
-          export CHROME_BIN=/usr/bin/chromium-browser
-          export PATH=$PATH:/usr/lib/chromium/
-          mvn clean test -Dsurefire.suiteXmlFiles=testng.xml -Dselenium.headless=true
-
-      - name: Upload Test Reports
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Cache Maven packages
+        uses: actions/cache@v3
         with:
-          name: test-reports
-          path: Selenium_Automation_Framework_Java/target/surefire-reports/**
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build without tests
+        run: mvn clean install -DskipTests
+        working-directory: ./   # 👈 Adjust if pom.xml is inside a subfolder
+
+      - name: Run TestNG Tests (headless)
+        run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml -Dselenium.headless=true
+        working-directory: ./
