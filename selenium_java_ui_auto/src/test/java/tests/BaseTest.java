@@ -23,8 +23,14 @@ public class BaseTest {
         driver = DriverManager.getDriver();
         System.out.println("Driver initialized: " + (driver != null));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+
+        // maximize only if NOT running inside GitHub Actions
+        if (System.getenv("GITHUB_ACTIONS") == null) {
+            driver.manage().window().maximize();
+        }
+
         driver.get(appUrl);
+
     }
 
     @AfterMethod

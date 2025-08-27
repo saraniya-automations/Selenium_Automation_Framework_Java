@@ -32,4 +32,8 @@ public class ConfigReader {
     public static String getAppUrl() {
         return getProperty("app.url");
     }
+
+    public static String getHeadless() {
+        return properties.getProperty("headless", "false");
+    }
 }
