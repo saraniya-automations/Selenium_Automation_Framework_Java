@@ -25,7 +25,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         // maximize only if NOT running inside GitHub Actions
-        if (System.getenv("GITHUB_ACTIONS") == null) {
+        if (!ConfigReader.getHeadless().equalsIgnoreCase("true")) {
             driver.manage().window().maximize();
         }
 
