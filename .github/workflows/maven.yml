@@ -30,8 +30,8 @@ jobs:
 
       - name: Build without tests
         run: mvn clean install -DskipTests
-        working-directory: ./   # 👈 Adjust if pom.xml is inside a subfolder
+        working-directory: ./selenium_java_ui_auto   # 👈 points to folder with pom.xml
 
       - name: Run TestNG Tests (headless)
         run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml -Dselenium.headless=true
-        working-directory: ./
+        working-directory: ./selenium_java_ui_auto   # 👈 run tests inside this folder
