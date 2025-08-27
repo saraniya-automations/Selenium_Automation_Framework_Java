@@ -5,9 +5,13 @@
         <listener class-name="utils.TestListener" />
     </listeners>
     <test name="UI Automation Tests">
-        <packages>
+        <!-- <packages>
             <package name="tests">
             </package>
-        </packages>
+        </packages> -->
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.DashboardTest"/>
+        </classes>
     </test>
 </suite>
