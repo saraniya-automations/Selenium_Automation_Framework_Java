@@ -1,0 +1,29 @@
+name: Selenium UI Tests CI
+
+on:
+  workflow_dispatch:   # 👈 enables manual trigger
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Build and test
+        run: |
+          mvn clean install -DskipTests
+          mvn test -Dsurefire.suiteXmlFiles=testng.xml
+        working-directory: ./selenium_java_ui_auto
